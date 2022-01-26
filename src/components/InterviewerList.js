@@ -1,9 +1,14 @@
 import React from 'react';
 import "components/InterviewerList.scss"
 import InterviewerListItem from './InterviewerListItem';
+import PropTypes from 'prop-types';
 
 function InterviewerList(props) {
   const { value, onChange, interviewers } = props
+
+  InterviewerList.propTypes = {
+    interviewers: PropTypes.array.isRequired
+  };
 
   return (
     <section className="interviewers">

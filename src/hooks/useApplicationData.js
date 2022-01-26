@@ -48,8 +48,10 @@ export default function useApplication() {
       })
     }
 
+    console.log("third", interview)
+
     return axios.put(`/api/appointments/${id}`, {interview})
-      .then((response) => setState(state => ({...state, spots, appointments})))
+      .then((response) => setState({...state, spots, appointments}))
   }
 
   function cancelInterview(id) {

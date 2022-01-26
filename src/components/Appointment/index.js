@@ -31,22 +31,25 @@ function Appointment(props) {
   function save(name, interviewer) {
     transition(SAVING);
 
+    console.log("first", interviewer)
+
     const interview = {
       student: name,
       interviewer
     };
 
-    if (!name) {
-      transition(ERROR_EMPTY, true)
-    } else {
+    console.log("second", interview)
+
       props
       .bookInterview(props.id, interview)
-      .then(() => transition(SHOW))
+      .then(() => {
+        console.log("fourth")
+        transition(SHOW)
+      })
       .catch(error => transition(ERROR_SAVE, true));
-    }
   }
 
-  function deleteInterview(event) {
+  function deleteInterview() {
     transition(DELETING, true);
     props
      .cancelInterview(props.id)

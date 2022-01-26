@@ -4,36 +4,48 @@ import Button from 'components/Button';
 import { useState } from 'react';
 
 function Form(props) {
-  const [student, setStudent ] = useState(props.student || "");
+  const [name, setName ] = useState(props.name || "");
+  const [error, setError] = useState("");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
 
   const reset = () => {
-    setStudent(""); 
+    setName(""); 
     setInterviewer("");
   }
 
   const cancel = () => {
     reset();
-    props.onCancel();
+    props.onCancel();     
   }
 
-  const onSave = () => {
-    props.onSave(student, interviewer);
+  const onSave = () => {                                                                             
+    props.onSave(name, interviewer);
+  }
+
+  function validate() {
+    if (name === "") {
+      setError("Student name cannot be blank");
+      return;
+    }
+    props.onSave(name, interviewer);
+    setError(null)
   }
 
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
         <form onSubmit={event => event.preventDefault()} autoComplete="off">
+        <section className="appointment__validation">{error}</section>
           <input
             className="appointment__create-input text--semi-bold"
             name="name"
             type="text"
             placeholder="Enter Student Name"
-            value={student}
+            value={name}
             onChange={(event) => {
-              setStudent(event.target.value)
+              setName(event.target.value)
             }}
+            data-testid="student-name-input"
           />
         </form>
         <InterviewerList
@@ -45,7 +57,7 @@ function Form(props) {
       <section className="appointment__card-right">
         <section className="appointment__actions">
           <Button danger onClick={cancel}>Cancel</Button>
-          <Button confirm onClick={onSave}>Save</Button>
+          <Button confirm onClick={validate}>Save</Button>
         </section>
       </section>
     </main>
