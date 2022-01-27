@@ -23,10 +23,11 @@ function Form(props) {
   }
 
   function validate() {
-    if (name === "") {
-      setError("Student name cannot be blank");
+    if (name === "" || interviewer === null) {
+      setError("Field cannot be blank");
       return;
     }
+
     props.onSave(name, interviewer);
     setError(null)
   }

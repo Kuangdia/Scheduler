@@ -15,12 +15,14 @@ function Show(props) {
           <img
             className="appointment__actions-button"
             src="images/edit.png"
+            alt="Edit"
             onClick={props.onEdit}
           />
           <img
             className="appointment__actions-button"
             src="images/trash.png"
             onClick={props.onDelete}
+            alt="Delete"
           />
         </section>
       </section>

@@ -66,7 +66,7 @@ function Appointment(props) {
       {mode === CONFIRM && <Confirm message="Delete this interview?" onCancel={() => back()} onConfirm={deleteInterview}/>}
       {mode === EDITING && <Form name={props.interview.student} interviewer={props.interview.interviewer.id} interviewers={props.interviewers} onCancel={() => transition(SHOW)} onSave={save}/>}
       {mode === SAVING && <Status message="SAVING"/>}
-      {mode === DELETING && <Status message="DELETING" />}
+      {mode === DELETING && <Status message="Deleting" />}
       {mode === ERROR_SAVE && <Error message="Error Saving. Try again" onClose={() => back()} />}
       {mode === ERROR_DELETE && <Error message="Error Deleting. Try again" onClose={() => back()} />}
       {mode === ERROR_EMPTY && <Error message="Missing input" onClose={() => back()}/>}
