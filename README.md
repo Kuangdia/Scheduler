@@ -4,7 +4,7 @@ Interview Scheduler is a light-weight single-page app (SPA) that allows users to
 
 # Final Product
 
-![Demo Page]()
+![Demo Page](https://github.com/Kuangdia/Scheduler/blob/master/docs/demo-page.png)
 
 ## Setup
 
@@ -13,7 +13,7 @@ Interview Scheduler is a light-weight single-page app (SPA) that allows users to
 
 ## Running Webpack Development Server with API Server
 
-Run this command in both of the root folder
+Run this command in both of the root folders
 
 ```sh
 npm start
