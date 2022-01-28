@@ -24,6 +24,20 @@ export default function useApplication() {
     });
   }, [])
 
+  function editInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    return axios.put(`/api/appointments/${id}`, {interview})
+      .then((response) => setState({...state, appointments}))
+  }
+
   function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
@@ -64,21 +78,28 @@ export default function useApplication() {
     };
 
     let spots = state.days;
+
     if (state.appointments[id].interview) {
       spots = state.days.map((item) => {
         if (item.appointments.includes(id)) {
-          item.spots ++;
-          return item;
-        } else {
-          return item;
+          if (item.spots < 5) {
+            item.spots ++;
+            return item;
+          } else {
+            return item;
+          }
         }
       })
     }
 
     return axios.delete(`/api/appointments/${id}`)
-    .then((response) => setState(state => ({...state, spots, appointments})))
+    .then((response) => {
+      setState(state => ({...state, spots, appointments}))
+      console.log("spots", state.spots)
+      console.log("app", state.appointments)
+   })
   }
 
-  return { state, setDay, bookInterview, cancelInterview }
+  return { state, setDay, editInterview, bookInterview, cancelInterview }
 
 };
